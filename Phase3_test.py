@@ -11,14 +11,17 @@ email = f"{unique_id}@{domain}"
 
 # General variables
 
-firstName = "Johnie"
-lastName = "Jhones"
+firstName = "Barbara"
+lastName = "Gordon"
 password = "Tosca1234"
 selectedCamera = "Digital SLR Camera"
-city = "Cape Town"
-address = "25 Jhonsen Street"
-zipCode = "911"
-phoneNumber = "2025202620"
+city = "Vienna"
+address = "Vienna Street"
+zipCode = "1234"
+phoneNumber = "001122334455"
+cardHolder = "Barbara Gordon"
+cardNumber = "4485564059489345"
+cardCode = "123"
 driver = webdriver.Edge()
 f = driver.find_element
 
@@ -50,7 +53,7 @@ ItemInCartQuantity_Xpath = "//input[@name='itemquantity6380790']"
 TermsOfService_Xpath = "//input[@id='termsofservice']"
 CheckoutBtn_Xpath = "//button[@id='checkout']"
 
-CountryBtn_Xpath = "//option[@value='71']"
+CountryBtn_Xpath = "//option[@value='18']"
 CityField_Xpath = "//input[@id='BillingNewAddress_City']"
 AddressField_Xpath = "//input[@id='BillingNewAddress_Address1']"
 ZipCodeField_Xpath = "//input[@id='BillingNewAddress_ZipPostalCode']"
@@ -59,12 +62,19 @@ PhoneNumberField_Xpath = "//input[@id='BillingNewAddress_PhoneNumber']"
 BillingContinue_Xpath = "//input[@onclick='Billing.save()']"
 ShoppingContinue_Xpath = "//input[@onclick='Shipping.save()']"
 MethodContinue_Xpath = "//input[@onclick='ShippingMethod.save()']"
+PaymentOption_Xpath = "//input[@id='paymentmethod_2']"
 PaymentContinue_Xpath = "//input[@onclick='PaymentMethod.save()']"
 PaymentInfoContinue_Xpath = "//input[@class='button-1 payment-info-next-step-button']"
 ConfirmOrder_Xpath = "//input[@value='Confirm']"
 CompleteBtn_Xpath = "(//input[@value='Continue'])[1]"
 PurchaseCompleted = "Your order has been successfully processed!"
 Purchase_Xpath = "//strong[normalize-space()='Your order has been successfully processed!']"
+
+ExpirationMonth_Xpath = "//option[normalize-space()='04']"
+CardHolderName_Xpath = "//input[@id='CardholderName']"
+CardNumberField_Xpath = "//input[@id='CardNumber']"
+CardCodeField_Xpath = "//input[@id='CardCode']"
+
 
 
 @pytest.fixture
@@ -225,9 +235,24 @@ def test_CartAndCheckout(setUp):
     method_continue_button.click()
     print("User clicked continue to payment details")
 
+    payment_method_selection = f(By.XPATH, PaymentOption_Xpath)
+    payment_method_selection.click()
+
     payment_continue_button = f(By.XPATH, PaymentContinue_Xpath)
     payment_continue_button.click()
     print("User clicked continue to payment information")
+
+    card_holder_name_field = f(By.XPATH, CardHolderName_Xpath)
+    card_holder_name_field.send_keys(cardHolder)
+
+    card_number_field = f(By.XPATH, CardNumberField_Xpath)
+    card_number_field.send_keys(cardNumber)
+
+    card_code_field = f(By.XPATH, CardCodeField_Xpath)
+    card_code_field.send_keys(cardCode)
+
+    expiration_date_button = f(By.XPATH, ExpirationMonth_Xpath)
+    expiration_date_button.click()
 
     payment_info_continue_button = f(By.XPATH, PaymentInfoContinue_Xpath)
     payment_info_continue_button.click()
