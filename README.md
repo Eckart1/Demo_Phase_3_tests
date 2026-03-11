@@ -11,7 +11,9 @@ It is assumed that you have PyCharm installed
 It is assumed that you have selenium, py.test and pip3 installed
 
 
-Tradeoffs:
+Tradeoffs: 
+I chose a linear script style for readability, which might require refactoring into a Page Object Model as the project grows.
 
 
-Improvements:
+Improvements: 
+Implement Page Object Model (POM) for better maintenance.
